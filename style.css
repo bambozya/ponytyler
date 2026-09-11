@@ -40,11 +40,11 @@
   --masthead-scale: clamp(var(--scale-min), 16vw, var(--scale-max));
   /* Small text and tap targets would get unreadably small as plain fractions, so they start from a readable floor and grow by a fraction of the scale's growth (0 → 4rem) – same clamp points. */
   --scale-growth: calc(var(--masthead-scale) - var(--scale-min));
-  --font-size-body: calc(1rem + var(--scale-growth) / 16);
-  --font-size-footer: calc(0.8125rem + var(--scale-growth) / 32);
-  --font-size-tagline: calc(var(--masthead-scale) * 0.1875);
+  --font-size-body: calc(var(--masthead-scale) / 6);
+  --font-size-footer: calc(var(--masthead-scale) / 6);
+  --font-size-tagline: calc(var(--masthead-scale) * 0.19);
   --font-size-heading: calc(var(--masthead-scale) * 0.47);
-  --size-touch: calc(2.75rem + var(--scale-growth) / 16);
+  --size-touch: calc(var(--masthead-scale) * 0.5);
   --width-full: 100%;
   --width-copy: calc(var(--masthead-scale) * 4.6);
   --width-action: calc(var(--masthead-scale) * 1.5);
@@ -159,11 +159,6 @@ body::before {
   z-index: 2;
   background:
     radial-gradient(
-      ellipse 16% 9% at 30% 17%,
-      var(--gloss-highlight),
-      transparent
-    ),
-    radial-gradient(
       ellipse 62% 34% at 42% 12%,
       var(--gloss-sheen),
       transparent 70%
@@ -217,6 +212,7 @@ h1 em {
   margin: var(--space-m) var(--margin-none) var(--margin-none);
   font-size: var(--font-size-tagline);
   letter-spacing: 0.01em;
+  text-align: center;
 }
 .tagline span {
   color: var(--accent);
