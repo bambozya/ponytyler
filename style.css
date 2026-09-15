@@ -25,6 +25,8 @@
   --paper: #e9e3d3;
   --accent: #48ec9b;
   --primary: #ec4899;
+  --orange: #f2853d;
+  --sky: #62b6f5;
   --black: #090909;
   --black-deep: #050505;
   --gray: #aaa493;
@@ -419,4 +421,159 @@ h2 span {
 }
 .footer a:hover {
   color: var(--accent);
+}
+/* Timeline page (timeline.html): one block per year, one row per show. Filtering hides rows and years via the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+.page-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.page-intro .action-link {
+  margin-top: var(--space-xs);
+}
+.filter-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-s);
+  margin-top: var(--space-m);
+  padding: var(--space-xs) var(--space-s);
+  background: var(--primary);
+  color: var(--ink);
+  transform: rotate(-1deg);
+}
+.filter-note p {
+  margin: var(--margin-none);
+}
+.filter-reset {
+  padding: var(--space-2xs) var(--space-xs);
+  border: var(--border-thick) solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.filter-reset:hover,
+.filter-reset:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent);
+  outline: none;
+}
+.timeline-years {
+  padding-bottom: var(--space-l);
+}
+.year {
+  margin-top: var(--space-l);
+}
+.year h2 {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: var(--margin-none);
+  padding: var(--space-xs) var(--padding-none);
+  border-bottom: var(--border-thick) solid var(--paper);
+  background: var(--surface);
+  font-size: var(--font-size-heading);
+}
+.shows {
+  margin: var(--space-xs) var(--margin-none) var(--margin-none);
+  padding: var(--padding-none);
+  list-style: none;
+}
+/* Every show is a sticker in one of five site colours, tilted alternately like the booking block. timeline.js re-numbers the tones after filtering so neighbours never share a colour. */
+.show {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2xs) var(--space-s);
+  margin-bottom: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs) var(--space-xs);
+  background: var(--primary);
+  color: var(--ink);
+}
+.show:nth-child(odd) {
+  transform: rotate(-0.6deg);
+}
+.show:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+.show:nth-child(5n + 2) {
+  background: var(--accent);
+}
+.show:nth-child(5n + 3) {
+  background: var(--paper);
+}
+.show:nth-child(5n + 4) {
+  background: var(--orange);
+}
+.show:nth-child(5n + 5) {
+  background: var(--sky);
+}
+/* After filtering, timeline.js re-numbers the visible shows; these come last so they win over the position rules above. */
+.show[data-tone="1"] {
+  background: var(--primary);
+}
+.show[data-tone="2"] {
+  background: var(--accent);
+}
+.show[data-tone="3"] {
+  background: var(--paper);
+}
+.show[data-tone="4"] {
+  background: var(--orange);
+}
+.show[data-tone="5"] {
+  background: var(--sky);
+}
+.show time {
+  padding-top: 0.15em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.show-body {
+  min-width: 0;
+}
+.show-venue {
+  display: block;
+  font-family: "Archivo Black", sans-serif;
+  font-size: calc(var(--font-size-body) * 1.25);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.show-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2xs) var(--space-xs);
+  margin: var(--space-2xs) var(--margin-none) var(--margin-none);
+}
+.show-city {
+  padding: var(--padding-none) 0.2em;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
+  cursor: pointer;
+}
+.show-city:hover,
+.show-city:focus-visible,
+.show-city[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  outline: none;
+}
+.show-note {
+  opacity: 0.75;
+}
+.show-note::before {
+  content: "\2022  ";
 }
